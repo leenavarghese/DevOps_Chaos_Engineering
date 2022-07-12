@@ -11,11 +11,7 @@ Chaos Engineering is the discipline of experimenting with a system in order to b
 * The CE is not just about Kubernetes, it’s about inside Kubernetes and outside of it
 
 ## METHODOLOGY
-What we usually want to do is to build a **hypothesis** around the **steady-state behavior**. What that means is we want to define how our system, or a part of it, behaves under specific conditions or in a normal state(ideal case). We want to perform some potentially damaging actions on the network, on the applications, on the nodes, or against any other component of the system. Those actions are, most of the time, very destructive.
-**
-We want to validate a hypothesis by starting our system in a steady state, then
-performing some destructive actions, and after that, we check the state of the system and validate if the state of the system has changed or not.
-**
+What we usually want to do is to build a **hypothesis** around the **steady-state behavior**. What that means is we want to define how our system, or a part of it, behaves under specific conditions or in a normal state(ideal case). We want to perform some potentially damaging actions on the network, on the applications, on the nodes, or against any other component of the system. Those actions are, most of the time, very destructive. We want to validate a hypothesis by starting our system in a steady state, then performing some destructive actions, and after that, we check the state of the system and validate if the state of the system has changed or not
 
 So this is the list of activities at a high level:
 * Define the steady-state hypothesis.
