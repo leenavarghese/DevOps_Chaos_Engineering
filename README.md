@@ -38,7 +38,7 @@ recognizable normal state (called the system is within tolerances), to begin the
 
 ## INSTALLATION
 * Run the following command. First, we install Python virtual environment 
-sudo apt-get install python3 python3-venv
+'''sudo apt-get install python3 python3-venv'''
 * Then we create a virtual environment. We call it chaostk (for chaos toolkit)
 python3 -m venv ~/.venvs/chaostk
 * Then we activate that environment
