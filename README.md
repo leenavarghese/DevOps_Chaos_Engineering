@@ -12,10 +12,10 @@ Chaos Engineering is the discipline of experimenting with a system in order to b
 
 ## METHODOLOGY
 What we usually want to do is to build a **hypothesis** around the **steady-state behavior**. What that means is we want to define how our system, or a part of it, behaves under specific conditions or in a normal state(ideal case). We want to perform some potentially damaging actions on the network, on the applications, on the nodes, or against any other component of the system. Those actions are, most of the time, very destructive.
-```
+**
 We want to validate a hypothesis by starting our system in a steady state, then
 performing some destructive actions, and after that, we check the state of the system and validate if the state of the system has changed or not.
-```
+**
 
 So this is the list of activities at a high level:
 * Define the steady-state hypothesis.
@@ -42,34 +42,52 @@ recognizable normal state (called the system is within tolerances), to begin the
 sudo apt-get install python3 python3-venv 
 ```
 * Then we create a virtual environment. We call it chaostk (for chaos toolkit)
+```
 python3 -m venv ~/.venvs/chaostk
+```
 * Then we activate that environment
+```
 source ~/.venvs/chaostk/bin/activate
+```
 * You will see the prompt changed.
 * Then we install the chaostoolkit
+```
 pip install -U chaostoolkit
+```
 * If you get an error message about the “wheel” package you can install it by the following command:
+```
 pip3 install wheel
+```
 * Make sure it’s installed successfully
+```
 chaos --version
+```
 NOTE: to exit from the virtual environment run:”deactivate” command
 * Now you can install the Kubernetes integration through its Chaos Toolkit extension using pip:
+```
 pip install -U chaostoolkit-kubernetes
+```
 * The pip tool fetches the chaostoolkit-kubernetes extension and installs it along with any necessary dependencies. You can now check that this extension is properly installed by executing:
+```
 pip freeze | grep chaostoolkit
+```
 ![extensions](./images/proper_installation_extensions.png)
 NOTE: Since in this practise we are practising in Kubernetes, make sure that Kubernetes is up and running.
 
 ## CREATING THE FIRST CHAOS EXPERIMENT
 To use the chaos command you need to be in the Python virtual environment that you have created earlier. If you have deactivated that, run the following:
+```
 source ~/.venvs/chaostk/bin/activate
+```
 ### A Running Application
 * First, run the service.py . This code creates a file called exchange.dat and writes the current date and time every 10 seconds. Read the [service.py](./service.py) code to get a better understanding.
 [service.py working](./images/service.py%20working.png)
 * In the terminal run the service like below:
 ![run service](./images/run%20service.png)
 * And in the second terminal,run the following command. The endpoint shows the content of exchange.dat:
+```
 curl <<publicIP>>:8080
+```
 ![connect to port](./images/connect_server_port8080.png)
 We can ctrl+c now to stop the service. 
 
@@ -89,9 +107,13 @@ In this methods for the experiment we're creating are listed below:
 ### Running the Experiment
 Your experiment here is simply to ensure that the service should not break if a file is removed, and it simply tries again until the file comes back. Now imagine the system that you want to test is represented as a single Python service in [service.py](./service.py), and your experiment is all set in the [experiment.json](./experiment.json) file, to explore a potential weakness in that system.
 * Open a second terminal and make sure the service is still running by :
+```
 python3 service.py
+```
 *  In the first terminal, make sure you are in the virtual environment and now run the experiment:
+```
 chaos run experiment.json
+```
 ![run exp](./images/run_experiment.png)
 * If you look into the other terminal, you see that it has generated a 500 code. That code was not in the domain of toleration:
 ![error500](./images/error500.png)
